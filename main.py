@@ -13,13 +13,13 @@ def next_turn(row : int, column : int, label : Label):
         elif status:
             label.config(text=f'{assests.player} wins!')
         else:
-            assests.player = assests.players[1] if assests.player == assests.player[0] else assests.players[0]
+            assests.player = assests.players[1] if assests.player == assests.players[0] else assests.players[0]
             label.config(text=f'{assests.player} turn')
 
 
 def check_win():
     # a win
-    pass
+    return False
 
 def empty_spaces():
     # recognize a tie
