@@ -1,6 +1,12 @@
+from random import choice
+
+player = None
 players = ['X', 'O']
 board = [[0, 0, 0],
          [0, 0, 0],
          [0, 0, 0]]
 
-__all__ = ["players", "board"]
+def pick_player():
+    player = choice(players)
+
+__all__ = ["player", "players", "board", "pick_player"]
