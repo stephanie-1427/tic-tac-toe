@@ -1,2 +1,6 @@
 players = ['X', 'O']
-board = 
+board = [[0, 0, 0],
+         [0, 0, 0],
+         [0, 0, 0]]
+
+__all__ = ["players", "board"]
