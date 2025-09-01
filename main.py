@@ -17,9 +17,28 @@ def next_turn(row : int, column : int, label : Label):
             label.config(text=f'{assests.player} turn')
 
 
-def check_win():
-    # a win
+def check_win() -> bool | str:
+    # Horizontal
+    for row in range(3):
+        if assests.board[row][0]['text'] == assests.board[row][1]['text'] == assests.board[row][2]['text'] != "":
+            return True
+
+    # Vertical
+    for col in range(3):
+        if assests.board[0][col]['text'] == assests.board[1][col]['text'] == assests.board[2][col]['text'] != "":
+            return True
+
+    # Diagonal
+    if assests.board[0][0]['text'] == assests.board[1][1]['text'] == assests.board[2][2]['text'] != "":
+        return True
+    elif assests.board[0][2]['text'] == assests.board[1][1]['text'] == assests.board[2][0]['text'] != "":
+        return True
+    # Tie
+    elif empty_spaces() is False:
+        return 'Tie!'
+
     return False
+
 
 def empty_spaces():
     # recognize a tie
