@@ -2,7 +2,7 @@ from tkinter import *
 import assests
 
 
-def next_turn(row : int, column : int, label : Label):
+def next_turn(row : int, column : int, label : Label) -> None:
     if assests.board[row][column]['text'] == "" and check_win() is False:
 
         assests.board[row][column].config(text=assests.player)
