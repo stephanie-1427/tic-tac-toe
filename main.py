@@ -19,4 +19,6 @@ def new_game():
 
 if __name__ == "__main__":
     window = Tk()
+    window.title("TicTacToe")
+    window.geometry("480x720")
     window.mainloop()
