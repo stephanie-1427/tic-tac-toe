@@ -21,20 +21,35 @@ def check_win() -> bool | str:
     # Horizontal
     for row in range(3):
         if assests.board[row][0]['text'] == assests.board[row][1]['text'] == assests.board[row][2]['text'] != "":
+            assests.board[row][0].config(bg='#00FF00')
+            assests.board[row][1].config(bg='#00FF00')
+            assests.board[row][2].config(bg='#00FF00')
             return True
 
     # Vertical
     for col in range(3):
         if assests.board[0][col]['text'] == assests.board[1][col]['text'] == assests.board[2][col]['text'] != "":
+            assests.board[0][col].config(bg='#00FF00')
+            assests.board[1][col].config(bg='#00FF00')
+            assests.board[2][col].config(bg='#00FF00')
             return True
 
     # Diagonal
     if assests.board[0][0]['text'] == assests.board[1][1]['text'] == assests.board[2][2]['text'] != "":
+        assests.board[0][0].config(bg='#00FF00')
+        assests.board[1][1].config(bg='#00FF00')
+        assests.board[2][2].config(bg='#00FF00')
         return True
     elif assests.board[0][2]['text'] == assests.board[1][1]['text'] == assests.board[2][0]['text'] != "":
+        assests.board[0][2].config(bg='#00FF00')
+        assests.board[1][1].config(bg='#00FF00')
+        assests.board[2][0].config(bg='#00FF00')
         return True
     # Tie
     elif empty_spaces() is False:
+        for row in range(3):
+            for col in range(3):
+                assests.board[row][col].config(bg='#FFFF00')
         return 'Tie!'
 
     return False
@@ -54,9 +69,10 @@ def empty_spaces() -> bool:
     return True
 
 
-def new_game():
+def new_game(label : Label):
     # Select new player
-    start_label()
+    assests.pick_player()
+    label.config(text=f"{assests.player} turn")
 
     # Clear the board
     for row in range(3):
@@ -64,15 +80,8 @@ def new_game():
             assests.board[row][col].config(text="", bg="#F0F0F0")
 
 
-def start_label() -> Label:
-    assests.pick_player()
-    label = Label(text=f"{assests.player} turn", font=('Verdana', 30))
-    label.pack(side="top")
-    return label
-
-
-def reset_button():
-    reset_button = Button(text="Restart", font=('Verdana', 15), command=new_game)
+def reset_button(label : Label):
+    reset_button = Button(text="Restart", font=('Verdana', 15), command=lambda : new_game(label))
     reset_button.pack(side="top")
 
 
@@ -87,8 +96,10 @@ def create_board(window : Tk, label : Label):
 
 
 def main(window : Tk):
-    label = start_label()
-    reset_button()
+    assests.pick_player()
+    label = Label(text=f"{assests.player} turn", font=('Verdana', 30))
+    label.pack(side="top")    
+    reset_button(label)
     create_board(window, label)
 
 
