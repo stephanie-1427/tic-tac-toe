@@ -1,29 +1,20 @@
 from tkinter import *
-from random import choice
 import assests
+
 
 def next_turn(row : int, column : int, label : Label):
     if assests.board[row][column]['text'] == "" and check_win() is False:
-        if assests.player == assests.players[0]:
-            assests.board[row][column]['text'] = assests.player
-            status = check_win()
-            if status:
-                label.config(text=f'{assests.players[0]} wins!')
-            elif status is False:
-                assests.player = assests.players[1]
-                label.config(text=f'{assests.player} turn')
-            elif status == "Tie!":
-                label.config(text='Tie!')
+
+        assests.board[row][column].config(text=assests.player)
+        status = check_win()
+
+        if status == "Tie!":
+            label.config(text='Tie!')
+        elif status:
+            label.config(text=f'{assests.player} wins!')
         else:
-            assests.board[row][column]['text'] = assests.player
-            status = check_win()
-            if status:
-                label.config(text=f'{assests.players[1]} wins!')
-            elif status is False:
-                assests.player = assests.players[0]
-                label.config(text=f'{assests.player} turn')
-            elif status == "Tie!":
-                label.config(text='Tie!')
+            assests.player = assests.players[1] if assests.player == assests.player[0] else assests.players[0]
+            label.config(text=f'{assests.player} turn')
 
 
 def check_win():
@@ -41,13 +32,13 @@ def reset_button():
     reset_button = Button(text="Restart", font=('Verdana', 15), command=new_game)
     reset_button.pack(side="top")
 
-def create_board(window : Tk):
+def create_board(window : Tk, label : Label):
     frame = Frame(window)
     frame.pack()
     for row in range(3):
         for col in range(3):
             assests.board[row][col] = Button(frame, text="", font=('Verdana', 40), width=5, height=2,
-                                     command=lambda row=row, col=col : next_turn(row, col))
+                                     command=lambda row=row, col=col : next_turn(row, col, label))
             assests.board[row][col].grid(row=row, column=col)
 
 
@@ -56,7 +47,7 @@ def main(window : Tk):
     label = Label(text=f"{assests.player} turn", font=('Verdana', 30))
     label.pack(side="top")
     reset_button()
-    create_board(window)
+    create_board(window, label)
 
 
 if __name__ == "__main__":
