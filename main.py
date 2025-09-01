@@ -40,9 +40,19 @@ def check_win() -> bool | str:
     return False
 
 
-def empty_spaces():
-    # recognize a tie
-    pass
+def empty_spaces() -> bool:
+    spaces = 9
+
+    for row in range(3):
+        for col in range(3):
+            if assests.board[row][col]['text'] != "":
+                spaces -= 1
+
+    # Condition for if spaces is 0
+    if not spaces:
+        return False
+    return True
+
 
 def new_game():
     pass
