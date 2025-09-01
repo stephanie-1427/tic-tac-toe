@@ -55,11 +55,26 @@ def empty_spaces() -> bool:
 
 
 def new_game():
-    pass
+    # Select new player
+    start_label()
+
+    # Clear the board
+    for row in range(3):
+        for col in range(3):
+            assests.board[row][col].config(text="", bg="#F0F0F0")
+
+
+def start_label() -> Label:
+    assests.pick_player()
+    label = Label(text=f"{assests.player} turn", font=('Verdana', 30))
+    label.pack(side="top")
+    return label
+
 
 def reset_button():
     reset_button = Button(text="Restart", font=('Verdana', 15), command=new_game)
     reset_button.pack(side="top")
+
 
 def create_board(window : Tk, label : Label):
     frame = Frame(window)
@@ -72,9 +87,7 @@ def create_board(window : Tk, label : Label):
 
 
 def main(window : Tk):
-    assests.pick_player()
-    label = Label(text=f"{assests.player} turn", font=('Verdana', 30))
-    label.pack(side="top")
+    label = start_label()
     reset_button()
     create_board(window, label)
 
