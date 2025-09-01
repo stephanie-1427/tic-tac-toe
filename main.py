@@ -1,6 +1,6 @@
 from tkinter import *
 from random import choice
-from assests import *
+import assests
 
 
 def next_turn():
@@ -26,14 +26,14 @@ def create_board(window : Tk):
     frame.pack()
     for row in range(3):
         for col in range(3):
-            board[row][col] = Button(frame, text="", font=('Verdana', 40), width=5, height=2,
+            assests.board[row][col] = Button(frame, text="", font=('Verdana', 40), width=5, height=2,
                                      command=lambda row=row, col=col : next_turn(row, col))
-            board[row][col].grid(row=row, column=col)
+            assests.board[row][col].grid(row=row, column=col)
 
 
 def main(window : Tk):
-    player = choice(players)
-    label = Label(text=f"{player} turn", font=('Verdana', 30))
+    assests.pick_player()
+    label = Label(text=f"{assests.player} turn", font=('Verdana', 30))
     label.pack(side="top")
     reset_button()
     create_board(window)
