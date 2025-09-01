@@ -3,7 +3,7 @@ from random import choice
 from assests import *
 
 
-def next_turn():
+def next_turn(row : int, column : int, player : str):
     pass
 
 def check_win():
