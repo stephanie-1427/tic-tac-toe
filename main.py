@@ -2,9 +2,29 @@ from tkinter import *
 from random import choice
 import assests
 
+def next_turn(row : int, column : int, label : Label):
+    if assests.board[row][column]['text'] == "" and check_win() is False:
+        if assests.player == assests.players[0]:
+            assests.board[row][column]['text'] = assests.player
+            status = check_win()
+            if status:
+                label.config(text=f'{assests.players[0]} wins!')
+            elif status is False:
+                assests.player = assests.players[1]
+                label.config(text=f'{assests.player} turn')
+            elif status == "Tie!":
+                label.config(text='Tie!')
+        else:
+            assests.board[row][column]['text'] = assests.player
+            status = check_win()
+            if status:
+                label.config(text=f'{assests.players[1]} wins!')
+            elif status is False:
+                assests.player = assests.players[0]
+                label.config(text=f'{assests.player} turn')
+            elif status == "Tie!":
+                label.config(text='Tie!')
 
-def next_turn():
-    pass
 
 def check_win():
     # a win
